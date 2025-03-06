@@ -38,6 +38,6 @@ export default ()=> {
             port: parseInt(process.env.REDIS_PORT || '6379'),
         },
     });
-    console.log("Connected to Redis");
+    // console.log("Connected to Redis");
 
 }

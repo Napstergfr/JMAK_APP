@@ -5,10 +5,10 @@ services:
     container_name: builder_service
     restart: always
     environment:
-      - R2_ACCOUNT_ID=
-      - R2_ACCESS_KEY_ID=
-      - R2_ACCESS_KEY_SECRET=
-      - R2_BUCKET=
+      - R2_ACCOUNT_ID=0f23a9fe02e7260db3b9922bda5c83a9
+      - R2_ACCESS_KEY_ID=14aa93a3794929f72b9ee376916b97b1
+      - R2_ACCESS_KEY_SECRET=70ddee46ef0c9122b1f8af968d13db06aff3e9163eddb11aded2df04babe0c28
+      - R2_BUCKET=builder
       - DOCKER_HOST=unix:///var/run/docker.sock
       - RADIS_HOST=redis-builder
       - RADIS_PORT=6370
@@ -25,20 +25,20 @@ services:
     ports:
       - "5487:8000"
     environment:
-      - BASE_PATH=
+      - BASE_PATH=https://pub-4975739d2cd141b2958f2d6a65579610.r2.dev
   api:
     image: ishafiul/builder-api-public:latest
     container_name: builder-api-public
     ports:
       - "4581:3548"
     environment:
-      - TURSO_AUTH_TOKEN=
-      - TURSO_URL=
-      - JWT_SECRET=
-      - SERVER_KEY=
+      - TURSO_AUTH_TOKEN=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NDEyNTQ1ODMsImlkIjoiYjRmZjFmOTQtOGQ4Ny00MWY3LTg0ZjMtNjc2ZjkxNjgzZjY1In0.fFP-bnYc56NMiPFgQbEeJNBt2kwAtiDyKho6yK7YOSy3IV6CA9UjmBYF5LpyU2sCWpboNHF_UahDuGfPVc5LDA
+      - TURSO_URL=libsql://jamkapp-napster.turso.io
+      - JWT_SECRET=secret
+      - SERVER_KEY=51f56768c5d69a3b2e5b72703976f3fe
+      - PROXY_HOST=localhost:8000
       - REDIS_HOST=redis-builder
       - REDIS_PORT=6379
-      - PROXY_HOST=ishaf.site
       - PORT:3548
     depends_on:
       - redis-builder
@@ -48,6 +48,4 @@ services:
     image: redis:7-alpine
     ports:
       - "6370:6379"
-    volumes:
-      - /mnt/sdb2/redis-data:/data
     restart: unless-stopped
