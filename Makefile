@@ -10,7 +10,7 @@ setup:
 	cd builder_api && cp .env.example .env
 	cd proxy && cp .env.example .env
 	cd builder-service && npm install
-	cd builder_api && bun install
+	cd builder_api && npm install
 	cd console && npm install
 	cd proxy && npm install
 	@echo "Setup complete. Please configure your .env files before starting the services."
